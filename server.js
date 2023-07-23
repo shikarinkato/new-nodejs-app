@@ -1,5 +1,5 @@
 const app = require("./app.js");
-const connectToMongo = require("./db.js");
+const connectToMongo = require("./data/db.js");
 
 connectToMongo();
 

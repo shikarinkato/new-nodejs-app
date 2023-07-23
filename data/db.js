@@ -4,8 +4,8 @@ const connectToMongo = () => {
     .connect(process.env.MONGO_URI, {
       dbName: process.env.DATABASE,
     })
-    .then(() => {
-      console.log("Successfully Connected To Database");
+    .then((c) => {
+      console.log(`Successfully Connected To Database ${c.connection.host}`);
     })
     .catch((err) => {
       console.log(err.message, "Failed To Connect Database");
