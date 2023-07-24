@@ -71,6 +71,7 @@ const logout = (req, res) => {
   try {
     res
       .cookie("token", "", {
+        httpOnly:true,
         expires: new Date(Date.now()),
         sameSite: process.env.NODE_ENV === "Developement" ? "lax" : "none",
         secure: process.env.NODE_ENV === "Developement" ? false : true,
