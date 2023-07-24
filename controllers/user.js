@@ -82,7 +82,7 @@ const logout = (req, res) => {
   }
 };
 
-// To Get Profile Details Using  USsing Cookie And User Id
+// To Get Profile Details Using Cookie And User Id
 
 const getmyProfile = (req, res) => {
   try {
