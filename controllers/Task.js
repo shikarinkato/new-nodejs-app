@@ -12,7 +12,6 @@ const addaNewNote = async (req, res) => {
       .status(201)
       .json({ success: true, message: "Note Added", id: req.user._id });
   } catch (error) {
-    console.log(error.message);
     res.status(500).send("Some Internal Server Occured");
   }
 };
@@ -28,7 +27,6 @@ const getMyTasks = async (req, res) => {
     }
     res.status(200).json({ success: true, task });
   } catch (error) {
-    console.log(error.message);
     res.status(500).send("Some Internal Server Occured");
   }
 };
@@ -45,7 +43,6 @@ const updateTask = async (req, res) => {
     await task.save();
     res.status(200).json({ success: true, message: "Task Updated" });
   } catch (error) {
-    console.log(error.message);
     res.status(500).send("Some Internal Server Occured");
   }
 };

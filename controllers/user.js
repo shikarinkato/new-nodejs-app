@@ -5,7 +5,6 @@ const { sendCookie } = require("../utils/features.js");
 const getAllUsers = async (req, res) => {
   try {
     let users = await User.find({});
-    console.log(req.query);
     res.json({
       success: true,
       users: users,
@@ -35,7 +34,10 @@ const login = async (req, res) => {
         message: "Please  Authenticate Using Valid Details",
       });
     }
-    sendCookie(user, res, `Welcome Back, ${user.name}`, 200);
+    sendCookie(user, req,res, `Welcome Back, ${user.name}`, 200);
+  console.log(req.cookies);
+
+    req.user = user;
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Some Internal Server Error Occured");
@@ -68,13 +70,14 @@ const register = async (req, res) => {
 };
 
 const logout = (req, res) => {
+  console.log(req.cookies);
   try {
     res
       .cookie("token", "", {
         httpOnly: true,
         expires: new Date(Date.now()),
-        sameSite: process.env.NODE_ENV === "Developement" ? "lax" : "none",
-        secure: process.env.NODE_ENV === "Developement" ? false : true,
+        sameSite: process.env.NODE_ENV === "Development" ? "lax" : "none",
+        secure: process.env.NODE_ENV === "Development" ? false : true,
       })
       .json({ success: true });
   } catch (error) {
