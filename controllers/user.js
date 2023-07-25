@@ -71,7 +71,7 @@ const logout = (req, res) => {
   try {
     res
       .cookie("token", "", {
-        httpOnly:true,
+        httpOnly: true,
         expires: new Date(Date.now()),
         sameSite: process.env.NODE_ENV === "Developement" ? "lax" : "none",
         secure: process.env.NODE_ENV === "Developement" ? false : true,
@@ -87,7 +87,12 @@ const logout = (req, res) => {
 
 const getmyProfile = (req, res) => {
   try {
-    res.json({ success: true, user: req.user });
+    const { token } = req.cookies;
+    res
+      .cookie("token", token, {
+        expires: new Date(Date.now() + 15 * 60 * 1000),
+      })
+      .json({ success: true, user: req.user });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Some Internal Server Error Occured");
